@@ -29,7 +29,11 @@ export const getFilteredTrips = ({trips, filters}) => {
   }
 
   // TODO - sort by cost descending (most expensive goes first)
-
+  output = output.sort(
+    (a, b) =>
+      parseFloat(b.cost.slice(1).split(',').join('')) -
+      parseFloat(a.cost.slice(1).split(',').join(''))
+  );
   return output;
 };
 
