@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
 import TripListOptions from './TripListOptions';
 import {getAllTags} from '../../../redux/tagsRedux';
+import { getAllRegions } from '../../../redux/regionsRedux';
 import {
   getAllFilters,
-  getAllRegions,
   changeSearchPhrase,
   changeFromDuration,
   changeToDuration,
+  selectRegion,
   addTag,
   removeTag,
 } from '../../../redux/filtersRedux';
