@@ -51,21 +51,6 @@ class TripListOptions extends React.Component {
               </label>
             </div>
           </Col>
-          <Col lg={3}>
-            <div className={styles.filter}>
-              <label>
-                <input
-                  className={`${styles.input} ${styles.search}`}
-                  type="text"
-                  placeholder="Search..."
-                  value={filters.phrase}
-                  onChange={(event) =>
-                    this.handleSearch(event.currentTarget.value)
-                  }
-                />
-              </label>
-            </div>
-          </Col>
           <Col lg={4}>
             <div className={styles.filter}>
               <label>
@@ -94,6 +79,26 @@ class TripListOptions extends React.Component {
                   }
                 />
               </label>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div className={styles.filter}>
+              <details>
+                <summary className={styles.toggle}>Filter by regions</summary>
+                <div className={styles.dropdown}>
+                  {Object.keys(tags).map((tag) => (
+                    <label
+                      key={tag}
+                      className={styles.option}
+                      onClick={(event) =>
+                        this.handleTags(tag, event.currentTarget.checked)
+                      }
+                    >
+                      {tag}
+                    </label>
+                  ))}
+                </div>
+              </details>
             </div>
           </Col>
           <Col lg={2}>
