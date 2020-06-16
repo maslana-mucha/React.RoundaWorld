@@ -28,6 +28,10 @@ export const getFilteredTrips = ({trips, filters}) => {
     });
   }
 
+  if(filters.region){
+    console.log("potrzebne tu kraje regionu:", filters.region);
+  }
+
   // TODO - sort by cost descending (most expensive goes first)
   output = output.sort(
     (a, b) =>

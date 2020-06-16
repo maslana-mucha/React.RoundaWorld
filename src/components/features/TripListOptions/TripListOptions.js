@@ -34,7 +34,6 @@ class TripListOptions extends React.Component {
   handleRegion(regionName) {
     console.log('selected region:', regionName);
     this.props.selectRegion(regionName);
-
   }
 
   render() {
