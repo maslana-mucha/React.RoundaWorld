@@ -5,8 +5,8 @@ import styles from './TripListOptions.scss';
 import {Row, Col} from 'react-flexbox-grid';
 
 class TripListOptions extends React.Component {
-  handleTags(tag, checked){
-    if(checked) {
+  handleTags(tag, checked) {
+    if (checked) {
       this.props.addTag(tag);
       console.log('Adding tag', tag);
       // TODO - use action dispatcher from props
@@ -17,7 +17,7 @@ class TripListOptions extends React.Component {
     }
   }
 
-  handleDuration(type, value){
+  handleDuration(type, value) {
     console.log('Changing duration', type, value);
     // TODO - use action dispatcher from props
     if (type === 'from') {
@@ -27,16 +27,21 @@ class TripListOptions extends React.Component {
     }
   }
 
-  handleSearch(phrase){
+  handleSearch(phrase) {
     this.props.changeSearchPhrase(phrase);
   }
 
-  render(){
-    const {tags, filters } = this.props;
+  handleRegion(regionName) {
+    console.log('selected region:', regionName);
+    this.props.selectRegion(regionName);
+  }
+
+  render() {
+    const { tags, filters, regions } = this.props;
     return (
       <div className={styles.component}>
         <Row around="lg">
-          <Col lg={4}>
+          <Col lg={3}>
             <div className={styles.filter}>
               <label>
                 <input
@@ -81,7 +86,25 @@ class TripListOptions extends React.Component {
               </label>
             </div>
           </Col>
-          <Col lg={4}>
+          <Col lg={3}>
+            <div className={styles.filter}>
+              <details>
+                <summary className={styles.toggle}>Filter by regions</summary>
+                <div className={styles.dropdown}>
+                  {Object.keys(regions).map((regionName) => (
+                    <label
+                      key={regionName}
+                      className={styles.option}
+                      onClick={() => this.handleRegion(regionName)}
+                    >
+                      {regionName}
+                    </label>
+                  ))}
+                </div>
+              </details>
+            </div>
+          </Col>
+          <Col lg={2}>
             <div className={styles.filter}>
               <details>
                 <summary className={styles.toggle}>Filter by tags</summary>
@@ -109,11 +132,13 @@ class TripListOptions extends React.Component {
 }
 
 TripListOptions.propTypes = {
+  regions: PropTypes.object,
   tags: PropTypes.object,
   filters: PropTypes.object,
   changeSearchPhrase: PropTypes.func,
   changeFromDuration: PropTypes.func,
   changeToDuration: PropTypes.func,
+  selectRegion: PropTypes.func,
   addTag: PropTypes.func,
   removeTag: PropTypes.func,
 };
