@@ -6,8 +6,8 @@
   color: $color-light;
   text-align: center;
   line-height: 1.3;
-  padding: $base-size;
-  margin: 0 $base-size;
+  padding: $base-size $base-size * 2;
+  margin: 0;
   border-radius: $radius;
   cursor: pointer;
   font-weight: 700;
