@@ -37,18 +37,8 @@ export const getFilteredTrips = ({trips, filters, countries}) => {
       }
     }
 
-    let output =[];
-    for(let i=0; i < countryArr.length; i++){
-      let countryCode = countryArr[i];
-      for(let i=0; i < trips.length; i++){
-        if (countryCode == trips[i].country.code){
-          console.log("masakra");
-          output.push(trips[i]);
-        }
-      }
-    }
-    console.log(output);
-    return output;
+    output = output.filter(trip =>
+      countryArr.some(countryCode => countryCode == trip.country.code));
   }
 
 
