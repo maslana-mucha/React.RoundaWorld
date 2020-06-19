@@ -14,11 +14,11 @@ const sendOrder = (options, tripCost, tripId, tripName, tripCountry) => {
   const totalCost = formatPrice(calculateTotal(tripCost, options));
 
   const payload = {
-    ...options,
-    totalCost,
     tripId,
     tripName,
     tripCountry: tripCountry.alpha3Code,
+    ...options,
+    totalCost,
   };
 
   const url = settings.db.url + '/' + settings.db.endpoint.orders;
@@ -42,36 +42,39 @@ const sendOrder = (options, tripCost, tripId, tripName, tripCountry) => {
 };
 
 const OrderForm = ({
-  tripCost,
-  options,
-  setOrderOption,
   tripId,
   tripName,
   tripCountry,
+  options,
+  setOrderOption,
+  tripCost,
 }) => (
-  <Row>
-    {pricing.map((option) => (
-      <Col md={4} key={option.id}>
-        <OrderOption
-          currentValue={options[option.id]}
-          setOrderOption={setOrderOption}
-          {...option}
-        />
+  <form>
+    <Row>
+      {pricing.map((option) => (
+        <Col md={4} key={option.id}>
+          <OrderOption
+            currentValue={options[option.id]}
+            setOrderOption={setOrderOption}
+            {...option}
+          />
+        </Col>
+      ))}
+      <Col xs={12}>
+        <OrderSummary tripCost={tripCost} options={options} />
+        <Button
+          onClick={
+            options.name && options.contact
+              ? () =>
+                sendOrder(options, tripCost, tripId, tripName, tripCountry)
+              : null
+          }
+        >
+          Order now
+        </Button>
       </Col>
-    ))}
-    <Col xs={12}>
-      <OrderSummary tripCost={tripCost} options={options} />
-      <Button
-        onClick={
-          options.name && options.contact
-            ? () => sendOrder(options, tripCost, tripId, tripName, tripCountry)
-            : null
-        }
-      >
-        Order now
-      </Button>
-    </Col>
-  </Row>
+    </Row>
+  </form>
 );
 
 OrderForm.propTypes = {

@@ -62,7 +62,8 @@
   {
     "id": "contact",
     "name": "Contact info (phone, email, etc.)",
-    "type":"text"
+    "required": true,
+    "type": "text"
   },
   {
     "id": "start-date",
