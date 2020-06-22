@@ -33,10 +33,8 @@ const sendOrder = (options, tripCost, tripId, tripName, tripCountry) => {
   };
 
   fetch(url, fetchOptions)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (parsedResponse) {
+    .then(response => response.json())
+    .then(parsedResponse => {
       console.log('parsedResponse', parsedResponse);
     });
 };
